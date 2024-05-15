@@ -1,0 +1,6 @@
+@SQRSSample.API_HostAddress = http://localhost:5110
+
+GET {{SQRSSample.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
