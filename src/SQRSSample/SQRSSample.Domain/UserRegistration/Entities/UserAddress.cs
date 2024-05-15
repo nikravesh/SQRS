@@ -4,7 +4,7 @@ namespace SQRSSample.Domain.UserRegistration.Entities;
 
 public class UserAddress : Entity<int>
 {
-    public uint ZipCode { get; private set; }
+    public string ZipCode { get; private set; }
     public string Province { get; private set; }
     public string City { get; private set; }
     public string BuildingNo { get; private set; }
@@ -13,8 +13,8 @@ public class UserAddress : Entity<int>
 
     private UserAddress() { }
 
-    public UserAddress(
-        uint zipCode,
+    private UserAddress(
+        string zipCode,
         string prvince,
         string city,
         string buildingNo,
@@ -24,7 +24,31 @@ public class UserAddress : Entity<int>
         ZipCode = zipCode;
         Province = prvince;
         City = city;
-        BuildingNo = buildingNo; 
+        BuildingNo = buildingNo;
+        PhoneNumber = phoneNumber;
+        CellPhone = cellPhone;
+    }
+
+    public static UserAddress Create(
+        string zipCode,
+        string prvince,
+        string city,
+        string buildingNo,
+        string phoneNumber,
+        string cellPhone) => new(zipCode, prvince, city, buildingNo, phoneNumber, cellPhone);
+
+    public void Update(
+        string zipCode,
+        string prvince,
+        string city,
+        string buildingNo,
+        string phoneNumber,
+        string cellPhone)
+    {
+        ZipCode = zipCode;
+        Province = prvince;
+        City = city;
+        BuildingNo = buildingNo;
         PhoneNumber = phoneNumber;
         CellPhone = cellPhone;
     }
