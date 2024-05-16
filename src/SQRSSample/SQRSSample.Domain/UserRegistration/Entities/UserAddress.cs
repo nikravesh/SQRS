@@ -13,43 +13,84 @@ public class UserAddress : Entity<int>
 
     private UserAddress() { }
 
-    private UserAddress(
+    internal UserAddress(
         string zipCode,
-        string prvince,
+        string province,
         string city,
         string buildingNo,
         string phoneNumber,
         string cellPhone)
     {
+        if (IsZipCodeNull(zipCode) ||
+            IsProvinceNull(province) ||
+            IsCityNull(city) ||
+            IsBuildingNoNull(buildingNo) ||
+            IsPhoneNumberNull(phoneNumber))
+            RaiseArgumentException(nameof(zipCode));
+
         ZipCode = zipCode;
-        Province = prvince;
+        Province = province;
         City = city;
         BuildingNo = buildingNo;
         PhoneNumber = phoneNumber;
         CellPhone = cellPhone;
     }
 
-    public static UserAddress Create(
+    internal void Update(
         string zipCode,
-        string prvince,
-        string city,
-        string buildingNo,
-        string phoneNumber,
-        string cellPhone) => new(zipCode, prvince, city, buildingNo, phoneNumber, cellPhone);
-
-    public void Update(
-        string zipCode,
-        string prvince,
+        string province,
         string city,
         string buildingNo,
         string phoneNumber,
         string cellPhone)
     {
+        if (IsZipCodeNull(zipCode) ||
+            IsProvinceNull(province) ||
+            IsCityNull(city) ||
+            IsBuildingNoNull(buildingNo) ||
+            IsPhoneNumberNull(phoneNumber))
+            RaiseArgumentException(nameof(zipCode));
+
         ZipCode = zipCode;
-        Province = prvince;
+        Province = province;
         City = city;
         BuildingNo = buildingNo;
         PhoneNumber = phoneNumber;
         CellPhone = cellPhone;
+    }
+
+    private bool IsZipCodeNull(string zipCode)
+    {
+        if (string.IsNullOrEmpty(zipCode)) return true;
+        return false;
+    }
+
+    private bool IsProvinceNull(string province)
+    {
+        if (string.IsNullOrEmpty(province)) return true;
+        return false;
+    }
+
+    private bool IsCityNull(string city)
+    {
+        if (string.IsNullOrEmpty(city)) return true;
+        return false;
+    }
+
+    private bool IsBuildingNoNull(string buildingNo)
+    {
+        if (string.IsNullOrEmpty(buildingNo)) return true;
+        return false;
+    }
+
+    private bool IsPhoneNumberNull(string phoneNumber)
+    {
+        if (string.IsNullOrEmpty(phoneNumber)) return true;
+        return false;
+    }
+
+    private void RaiseArgumentException(string arg)
+    {
+        throw new ArgumentException($"{nameof(arg)} cannot be null or empty!");
     }
 }
