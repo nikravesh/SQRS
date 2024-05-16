@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 
 using SQRSSample.Domain.Entity;
+using SQRSSample.Domain.Exceptions;
 
 namespace SQRSSample.Domain.UserRegistration.Entities;
 public class UserRegistration : AggregateRoot<int>
@@ -34,7 +35,7 @@ public class UserRegistration : AggregateRoot<int>
         string city,
         string buildingNo,
         string phoneNumber,
-        string cellPhone,UserRegistration user)
+        string cellPhone, UserRegistration user)
     {
         ArgumentNullException.ThrowIfNull($"{nameof(user.Id)} cannot be null!");
 
@@ -43,4 +44,40 @@ public class UserRegistration : AggregateRoot<int>
 
         return address;
     }
+
+    public void UpdatePassword(string password)
+    {
+        ArgumentException.ThrowIfNullOrEmpty($"{nameof(password)} cannot be null!");
+
+        Password = password;
+    }
+
+    public void UpdateEmail(string email)
+    {
+        ArgumentException.ThrowIfNullOrEmpty($"{nameof(email)} cannot be null!");
+
+        Email = email;
+    }
+
+    public void UpdateUserAddress(
+        long userAddressId, 
+        string zipCode,
+        string province,
+        string city,
+        string buildingNo,
+        string phoneNumber,
+        string cellPhone)
+    {
+        UserAddress? userAddress = _userAddresses.FirstOrDefault(x => x.Id == userAddressId);
+
+        if (userAddress is null)
+            throw new InvalidEntityStateException($"{nameof(userAddressId)} with value {userAddressId} not found!");
+
+        if ((userAddress.PhoneNumber == phoneNumber || userAddress.CellPhone == cellPhone))
+            throw new Exception($"user address for phone number : " +
+                $"{phoneNumber} and cell phone numebr : {cellPhone} already exist!");
+
+        userAddress.Update(zipCode,province,city,buildingNo, phoneNumber,cellPhone);
+    }
+
 }
