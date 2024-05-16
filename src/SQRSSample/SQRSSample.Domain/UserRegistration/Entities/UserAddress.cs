@@ -4,6 +4,7 @@ namespace SQRSSample.Domain.UserRegistration.Entities;
 
 public class UserAddress : Entity<int>
 {
+    public long UserId { get; internal set; }
     public string ZipCode { get; private set; }
     public string Province { get; private set; }
     public string City { get; private set; }
@@ -91,6 +92,6 @@ public class UserAddress : Entity<int>
 
     private void RaiseArgumentException(string arg)
     {
-        throw new ArgumentException($"{nameof(arg)} cannot be null or empty!");
+        ArgumentException.ThrowIfNullOrEmpty($"{nameof(arg)} cannot be null or empty!");
     }
 }
