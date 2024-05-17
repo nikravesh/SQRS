@@ -1,6 +1,7 @@
-﻿using SQRSSample.Domain.Exceptions;
+﻿
+using SQRSSample.Domain.Framework.Exceptions;
 
-namespace SQRSSample.Domain.ValueObjects;
+namespace SQRSSample.Domain.Framework.ValueObjects;
 
 public class BusinessId : BaseValueObject<BusinessId>
 {

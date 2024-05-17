@@ -1,4 +1,4 @@
-﻿namespace SQRSSample.Domain.ValueObjects;
+﻿namespace SQRSSample.Domain.Framework.ValueObjects;
 
 public abstract class BaseValueObject<TValueObject> : IEquatable<TValueObject>
         where TValueObject : BaseValueObject<TValueObject>

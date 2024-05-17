@@ -1,4 +1,4 @@
-﻿using SQRSSample.Domain.ValueObjects;
+﻿using SQRSSample.Domain.Framework.ValueObjects;
 
 namespace SQRSSample.Domain.Framework.Entity;
 public abstract class Entity<TId> : IAuditableEntity
