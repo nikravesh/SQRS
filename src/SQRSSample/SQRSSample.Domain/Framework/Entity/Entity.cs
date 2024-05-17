@@ -1,6 +1,6 @@
 ﻿using SQRSSample.Domain.ValueObjects;
 
-namespace SQRSSample.Domain.Entity;
+namespace SQRSSample.Domain.Framework.Entity;
 public abstract class Entity<TId> : IAuditableEntity
       where TId : struct,
       IComparable,

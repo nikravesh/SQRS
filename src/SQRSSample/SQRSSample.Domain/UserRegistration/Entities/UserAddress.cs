@@ -1,4 +1,4 @@
-﻿using SQRSSample.Domain.Entity;
+﻿using SQRSSample.Domain.Framework.Entity;
 
 namespace SQRSSample.Domain.UserRegistration.Entities;
 

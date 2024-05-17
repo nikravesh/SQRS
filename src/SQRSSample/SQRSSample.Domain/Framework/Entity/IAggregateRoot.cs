@@ -1,6 +1,6 @@
-﻿using SQRSSample.Domain.Events;
+﻿using SQRSSample.Domain.Framework.Events;
 
-namespace SQRSSample.Domain.Entity;
+namespace SQRSSample.Domain.Framework.Entity;
 
 public interface IAggregateRoot
 {

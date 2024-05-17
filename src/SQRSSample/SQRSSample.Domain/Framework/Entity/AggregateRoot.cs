@@ -1,8 +1,7 @@
 ﻿using System.Reflection;
+using SQRSSample.Domain.Framework.Events;
 
-using SQRSSample.Domain.Events;
-
-namespace SQRSSample.Domain.Entity;
+namespace SQRSSample.Domain.Framework.Entity;
 public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot where TId : struct,
           IComparable,
           IComparable<TId>,

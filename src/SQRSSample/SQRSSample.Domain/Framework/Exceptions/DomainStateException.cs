@@ -1,4 +1,4 @@
-﻿namespace SQRSSample.Domain.Exceptions;
+﻿namespace SQRSSample.Domain.Framework.Exceptions;
 
 public abstract class DomainStateException : Exception
 {

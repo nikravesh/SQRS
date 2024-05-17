@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 
-using SQRSSample.Domain.Entity;
-using SQRSSample.Domain.Exceptions;
+using SQRSSample.Domain.Framework.Entity;
+using SQRSSample.Domain.Framework.Exceptions;
 
 namespace SQRSSample.Domain.UserRegistration.Entities;
 public class UserRegistration : AggregateRoot<int>
@@ -60,7 +60,7 @@ public class UserRegistration : AggregateRoot<int>
     }
 
     public void UpdateUserAddress(
-        long userAddressId, 
+        long userAddressId,
         string zipCode,
         string province,
         string city,
@@ -77,7 +77,17 @@ public class UserRegistration : AggregateRoot<int>
             throw new Exception($"user address for phone number : " +
                 $"{phoneNumber} and cell phone numebr : {cellPhone} already exist!");
 
-        userAddress.Update(zipCode,province,city,buildingNo, phoneNumber,cellPhone);
+        userAddress.Update(zipCode, province, city, buildingNo, phoneNumber, cellPhone);
     }
 
+    public void DeleteUserAddress(List<long> userAddressList)
+    {
+        List<UserAddress> prepareUserAddressToDelete = _userAddresses.Where(
+            x => userAddressList.Any(u => u == x.Id)).ToList();
+
+        prepareUserAddressToDelete.ForEach(x =>
+        {
+            _userAddresses.Remove(x);
+        });
+    }
 }
